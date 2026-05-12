@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "author": "Ahnaf Mohammed - COMP50069",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": -206.5, "left": -91.4, "attrs": {} },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -249.3,
+      "left": 90.6,
+      "attrs": { "temperature": "25.6", "humidity": "40.5" }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "pot1",
+      "top": -279.7,
+      "left": -173,
+      "attrs": { "value": "512" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btnEmergency",
+      "top": -339.4,
+      "left": 96,
+      "attrs": { "color": "red", "label": "EMERGENCY", "key": "E" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btnReset",
+      "top": -425.8,
+      "left": 96,
+      "attrs": { "color": "green", "label": "RESET", "key": "R" }
+    },
+    {
+      "type": "wokwi-relay-module",
+      "id": "relay2chFan",
+      "top": -278.2,
+      "left": -96,
+      "attrs": { "label": "2CH Relay CH1 Fan" }
+    },
+    {
+      "type": "wokwi-relay-module",
+      "id": "relay2chHeater",
+      "top": -278.2,
+      "left": -67.2,
+      "attrs": { "label": "2CH Relay CH2 Heater" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "ledHeater",
+      "top": -253.2,
+      "left": -293.8,
+      "attrs": { "color": "orange", "label": "Heater Load" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "ledFan",
+      "top": -253.2,
+      "left": -332.2,
+      "attrs": { "color": "blue", "label": "Cooling Fan Load" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "ledFault",
+      "top": -253.2,
+      "left": -255.4,
+      "attrs": { "color": "red", "label": "Fault Alarm" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "ledIdle",
+      "top": -253.2,
+      "left": -217,
+      "attrs": { "color": "green", "label": "Idle / Normal" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "buzzer1",
+      "top": -208.8,
+      "left": 21,
+      "attrs": { "volume": "0.3" }
+    },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd1",
+      "top": -425.6,
+      "left": -215.2,
+      "attrs": { "pins": "i2c", "i2cAddress": "0x27", "background": "green", "color": "black" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "esp:3V3", "dht1:VCC", "red", [] ],
+    [ "esp:GND.1", "dht1:GND", "black", [] ],
+    [ "esp:D4", "dht1:SDA", "green", [] ],
+    [ "esp:3V3", "pot1:VCC", "red", [] ],
+    [ "esp:GND.1", "pot1:GND", "black", [] ],
+    [ "esp:D34", "pot1:SIG", "purple", [] ],
+    [ "esp:D25", "btnEmergency:1.r", "red", [] ],
+    [ "esp:GND.1", "btnEmergency:2.r", "black", [] ],
+    [ "esp:D26", "btnReset:1.r", "green", [] ],
+    [ "esp:GND.1", "btnReset:2.r", "black", [] ],
+    [ "esp:RX2", "ledFan:A", "blue", [] ],
+    [ "ledFan:C", "esp:GND.1", "black", [] ],
+    [ "esp:TX2", "ledHeater:A", "orange", [] ],
+    [ "ledHeater:C", "esp:GND.1", "black", [] ],
+    [ "esp:D23", "ledIdle:A", "green", [] ],
+    [ "ledIdle:C", "esp:GND.1", "black", [] ],
+    [ "esp:D18", "ledFault:A", "red", [] ],
+    [ "ledFault:C", "esp:GND.1", "black", [] ],
+    [ "esp:D19", "buzzer1:2", "violet", [] ],
+    [ "esp:GND.1", "buzzer1:1", "black", [] ],
+    [ "esp:3V3", "lcd1:VCC", "red", [] ],
+    [ "esp:GND.1", "lcd1:GND", "black", [] ],
+    [ "esp:D21", "lcd1:SDA", "green", [] ],
+    [ "esp:D22", "lcd1:SCL", "blue", [] ],
+    [ "esp:3V3", "relay2chFan:VCC", "red", [] ],
+    [ "esp:GND.1", "relay2chFan:GND", "black", [] ],
+    [ "esp:RX2", "relay2chFan:IN", "blue", [] ],
+    [ "esp:3V3", "relay2chHeater:VCC", "red", [] ],
+    [ "esp:GND.1", "relay2chHeater:GND", "black", [] ],
+    [ "esp:TX2", "relay2chHeater:IN", "orange", [] ]
+  ],
+  "serialMonitor": { "collapse": false, "convertEol": true, "display": "terminal", "newline": "lf" },
+  "dependencies": {}
+}
